@@ -5,18 +5,15 @@ import (
 )
 
 func TestFireBaseConfig(t *testing.T) {
-	fireBaseConfig() // Initialize Firestore client
+	client := FireBaseConfig()
 
-	// Ensure the test document exists
-	hello, err := client.Collection("test_collection").Doc("test_document").Set(ctx, map[string]interface{}{
-		"sampleField": "sampleVale",
-		"hello":       "jkjl",
+	_, err := client.Collection("test_collection").Doc("test_document").Create(ctx, map[string]interface{}{
+		"sampleField": "samleVale",
+		"hello":       "jkl",
 	})
 	if err != nil {
 		t.Fatalf("Failed to create test document: %v", err)
 	}
-	t.Fatalf("hkjhfkjs: %v", hello)
-	// Now attempt to retrieve it
 	doc, err := client.Collection("test_collection").Doc("test_document").Get(ctx)
 	if err != nil {
 		t.Errorf("Failed to retrieve document: %v", err)

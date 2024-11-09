@@ -18,7 +18,7 @@ var (
 	client *firestore.Client
 )
 
-func fireBaseConfig() {
+func FireBaseConfig() *firestore.Client {
 	wd, _ := os.Getwd()
 	envPath := filepath.Join(wd, "../../.env")
 	if err := godotenv.Load(envPath); err != nil {
@@ -36,6 +36,7 @@ func fireBaseConfig() {
 	if err != nil {
 		log.Fatalf("Firestore initialization failed: %v", err)
 	}
+	return client
 }
 
 func CloseFirestoreClient() {
